@@ -17,6 +17,7 @@ specifiers:
   autoprefixer: ^10.4.7
   eslint: ^8.34.0
   eslint-config-next: ^13.2.1
+  houseform: ^1.7.0
   next: ^13.2.1
   postcss: ^8.4.14
   prettier: ^2.8.1
@@ -36,6 +37,7 @@ dependencies:
   '@trpc/next': 10.18.0_fk7ybuwqrs7skzzxcj6wjc5c3i
   '@trpc/react-query': 10.18.0_rcvfzig2xktluz4p7kugxqlbwi
   '@trpc/server': 10.18.0
+  houseform: 1.7.0_react@18.2.0+zod@3.21.4
   next: 13.2.4_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -1612,6 +1614,16 @@ packages:
     dependencies:
       function-bind: 1.1.1
     dev: true
+
+  /houseform/1.7.0_react@18.2.0+zod@3.21.4:
+    resolution: {integrity: sha512-dPFU1t4Xi9xuxgBslbx4lbo9V3W0CrMK9QcA05WU3pxW8T4YVqb4WFkC0gcBkxN0rdMK1mPxP5mnUTv9Jzo6cw==}
+    peerDependencies:
+      react: '>=16.8.0'
+      zod: '>=3.9.0'
+    dependencies:
+      react: 18.2.0
+      zod: 3.21.4
+    dev: false
 
   /ignore/5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}

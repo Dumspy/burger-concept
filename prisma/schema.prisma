@@ -10,8 +10,24 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Example {
+model Restaurant {
     id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    name      String
+    address   String
+    longitude Float
+    latitude  Float
+    reviews   Review[]
+}
+
+model Review {
+    id                 String     @id @default(cuid())
+    image              String?
+    burgerName         String
+    body               String?
+    tasteRating        Int
+    textureRating      Int
+    presentationRating Int
+    restaurant         Restaurant @relation(fields: [restaurantId], references: [id])
+    restaurantId       String
+    createdAt          DateTime   @default(now())
 }
