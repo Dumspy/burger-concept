@@ -17,6 +17,7 @@ const StarField = ({
   return (
     <Field<number>
       name={name}
+      initialValue={0}
       onChangeValidate={z
         .number()
         .min(0)
