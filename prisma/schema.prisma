@@ -12,7 +12,7 @@ datasource db {
 
 model Restaurant {
     id        String    @id @default(cuid())
-    image     String    @default("placeholder-burger.jpg")
+    image     String    @default("/placeholder-burger.jpg")
     body      String?
     name      String
     address   String
