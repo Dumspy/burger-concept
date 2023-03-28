@@ -6,6 +6,7 @@ import Head from 'next/head';
 import { generateSSGHelper } from '~/server/helpers/ssgHelper';
 import { api } from '~/utils/api';
 import Router from 'next/router';
+import Link from 'next/link';
 
 const StarField = ({
   name,
@@ -83,19 +84,19 @@ interface FormTypes {
 }
 
 const ReviewPage: NextPage<{ slug: string }> = ({ slug }) => {
-  const { data } = api.resaurant.getBySlug.useQuery({slug});
-  
+  const { data } = api.resaurant.getBySlug.useQuery({ slug });
+
   const { mutate, isLoading: isPosting } = api.review.create.useMutation({
     onSuccess: () => {
-      void Router.push(`/${slug}`)
+      void Router.push(`/${slug}`);
     },
     onError: (e) => {
-      console.log(e)
+      console.log(e);
     },
   });
 
-  if(!data) return <div> 404 </div>
-  
+  if (!data) return <div> 404 </div>;
+
   return (
     <>
       <Head>
@@ -124,7 +125,7 @@ const ReviewPage: NextPage<{ slug: string }> = ({ slug }) => {
                 presentationRating: values.presentation,
                 burgerName: values.burgerName,
                 restuantId: data.id,
-              })
+              });
             }}
           >
             {({ isValid, submit }) => (
@@ -178,6 +179,11 @@ const ReviewPage: NextPage<{ slug: string }> = ({ slug }) => {
               </form>
             )}
           </Form>
+          <Link href={`/${slug}`}>
+            <button className="mt-2 rounded bg-red-600 p-2 text-slate-200 hover:bg-red-500">
+              Tilbage
+            </button>
+          </Link>
         </div>
       </main>
     </>
@@ -185,13 +191,13 @@ const ReviewPage: NextPage<{ slug: string }> = ({ slug }) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const ssg = generateSSGHelper()
+  const ssg = generateSSGHelper();
 
-  const slug = context.params?.slug
+  const slug = context.params?.slug;
 
-  if (typeof slug !== "string") throw new Error("no slug")
+  if (typeof slug !== 'string') throw new Error('no slug');
 
-  await ssg.resaurant.getBySlug.prefetch({slug})
+  await ssg.resaurant.getBySlug.prefetch({ slug });
 
   return {
     props: {
@@ -202,7 +208,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths = () => {
-  return { paths: [], fallback: 'blocking' }
+  return { paths: [], fallback: 'blocking' };
 };
 
-export default ReviewPage
+export default ReviewPage;

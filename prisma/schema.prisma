@@ -6,15 +6,17 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = env("DATABASE_URL")
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
 }
 
 model Restaurant {
     id        String    @id @default(cuid())
     image     String    @default("/placeholder-burger.jpg")
     body      String?
-    name      String
+    slug      String   @unique
+    prettyName String  @unique
     address   String
     longitude Float
     latitude  Float
@@ -29,6 +31,8 @@ model Opening {
     closeTime    String
     restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
     restaurantId String
+
+    @@index([restaurantId])
 }
 
 model Review {
@@ -42,4 +46,6 @@ model Review {
     restaurant         Restaurant @relation(fields: [restaurantId], references: [id])
     restaurantId       String
     createdAt          DateTime   @default(now())
+
+    @@index([restaurantId])
 }

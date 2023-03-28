@@ -11,7 +11,7 @@ dayjs.extend(relativeTime);
 const Stars = (props: { stars: number }) => {
   return (
     <div className="flex flex-row">
-      {Array.from({ length: props.stars+1 }).map((_, i) => {
+      {Array.from({ length: props.stars + 1 }).map((_, i) => {
         return (
           <svg
             key={i}
@@ -39,7 +39,7 @@ const ReviewFeed = (props: { restaurantId: string }) => {
 
   if (isLoading) return <div>Loading...</div>;
 
-  if (!data || data.length === 0) return <div>User has not posted</div>;
+  if (!data || data.length === 0) return <div>Resturant has no reviews</div>;
 
   return (
     <div className="flex h-4/5 flex-col justify-start">
@@ -49,13 +49,20 @@ const ReviewFeed = (props: { restaurantId: string }) => {
           className="flex h-1/5 justify-between border-b border-slate-400"
         >
           <div>
-            <h1 className="text-3xl font-bold">
-              Burger: {review.burgerName}
-            </h1>
+            <h1 className="text-3xl font-bold">Burger: {review.burgerName}</h1>
             <p>{review.body}</p>
-            <div className='flex flex-row gap-2'><p>Smag: </p><Stars stars={review.tasteRating}/></div>
-            <div className='flex flex-row gap-2'><p>Texture: </p><Stars stars={review.textureRating}/></div>
-            <div className='flex flex-row gap-2'><p>Præsentation: </p><Stars stars={review.presentationRating}/></div>
+            <div className="flex flex-row gap-2">
+              <p>Smag: </p>
+              <Stars stars={review.tasteRating} />
+            </div>
+            <div className="flex flex-row gap-2">
+              <p>Texture: </p>
+              <Stars stars={review.textureRating} />
+            </div>
+            <div className="flex flex-row gap-2">
+              <p>Præsentation: </p>
+              <Stars stars={review.presentationRating} />
+            </div>
           </div>
           <p className="">{dayjs(review.createdAt).fromNow()}</p>
         </div>
@@ -88,9 +95,18 @@ const RestaurantPage: NextPage<{ slug: string }> = ({ slug }) => {
                 <h1 className="text-3xl font-bold">{data.name}</h1>
                 <h2 className="text-lg font-semibold">{data.address}</h2>
                 <p className="font-semibold text-green-500">Åben</p>
-                <Link href={`/${slug}/review`}>
-                  <button className="bg-blue-600 hover:bg-blue-500 text-slate-200 font-bold p-2 rounded">Anmeld</button>
-                </Link>
+                <div className="flex flex-row gap-2">
+                  <Link href={`/${slug}/review`}>
+                    <button className="rounded bg-blue-600 p-2  text-slate-200 hover:bg-blue-500">
+                      Anmeld
+                    </button>
+                  </Link>
+                  <Link href="/">
+                    <button className="rounded bg-red-600 p-2 text-slate-200 hover:bg-red-500">
+                      Tilbage
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="mr-2 flex flex-col gap-1 text-right">
