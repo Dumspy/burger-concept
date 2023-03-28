@@ -1,1 +1,1 @@
-# A simple website for review burger places
+# A simple website for reviewing burger places
